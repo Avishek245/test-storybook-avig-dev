@@ -13,7 +13,11 @@
 }
 .storybook-button--secondary {
   box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
-  background-color: transparent;
+  background-color: #e7e7e7;
+  color: #333;
+}
+.storybook-button--warning{
+  background-color: #f44336;
   color: #333;
 }
 .storybook-button--small {

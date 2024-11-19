@@ -13,17 +13,19 @@ export interface ButtonProps {
   label: string;
   /** Optional click handler */
   onClick?: () => void;
+  variant?:'primary' | 'secondary' | 'warning';
 }
 
 /** Primary UI component for user interaction */
 export const Button = ({
-  primary = false,
+  variant='primary',
   size = 'medium',
   backgroundColor,
   label,
   ...props
 }: ButtonProps) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+ /*  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary'; */
+ const mode = `storybook-button--${variant}`;
   return (
     <button
       type="button"
