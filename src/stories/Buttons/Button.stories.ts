@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
 import { Button } from "../../components";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -14,10 +13,16 @@ const meta = {
   tags: ["autodocs"],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
-    backgroundColor: { control: "color" },
+    variant: {
+      control: { type: "radio" },
+      options: ["primary", "secondary","warning", "override","tertiary"],
+    },
+    disabled: { control: { type: "boolean" } },
+    pressed: {
+      control: { type: "boolean" },
+    },
+    onclick: { action: "clicked" },
   },
-  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
-  args: { onClick: fn() },
 } satisfies Meta<typeof Button>;
 
 export default meta;
@@ -27,7 +32,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     variant: "primary",
-    label: "Button",
+    label: "primary",
   },
 };
 
@@ -43,16 +48,17 @@ export const Warning: Story = {
     label: "Warning",
   },
 };
-export const Large: Story = {
+
+export const Override: Story = {
   args: {
-    size: "large",
-    label: "Button",
+    variant: "override",
+    label: "override",
   },
 };
 
-export const Small: Story = {
+export const tertiary: Story = {
   args: {
-    size: "small",
-    label: "Button",
+    variant: "tertiary",
+    label: "tertiary",
   },
 };

@@ -1,39 +1,41 @@
-import React from 'react';
+import React from "react";
 
-import './button.css';
+import "./button.css";
 
-export interface ButtonProps {
-  /** Is this the principal call to action on the page? */
-  primary?: boolean;
-  /** What background color to use */
-  backgroundColor?: string;
-  /** How large should the button be? */
-  size?: 'small' | 'medium' | 'large';
-  /** Button contents */
-  label: string;
-  /** Optional click handler */
-  onClick?: () => void;
-  variant?:'primary' | 'secondary' | 'warning';
-}
+type ButtonProps = {
+  variant: "primary" | "tertiary" | "warning" | "override" | "secondary";
+  className?: string;
+  disabled?: boolean;
+  label?: string;
+  pressed?: boolean;
+  icon?: any;
+  iconPosition?: "left" | "right";
+  onclick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+};
 
-/** Primary UI component for user interaction */
-export const Button = ({
-  variant='primary',
-  size = 'medium',
-  backgroundColor,
+export const Button: React.FC<ButtonProps> = ({
+  variant,
+  className = "",
+  disabled = false,
   label,
-  ...props
-}: ButtonProps) => {
- /*  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary'; */
- const mode = `storybook-button--${variant}`;
+  pressed = false,
+  icon,
+  iconPosition = "left",
+  onclick,
+}) => {
   return (
     <button
-      type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
-      style={{ backgroundColor }}
-      {...props}
+      className={`btn ${variant} ${className} ${pressed ? "pressed" : ""}`}
+      disabled={disabled}
+      onClick={onclick}
     >
-      {label}
+      {icon && iconPosition === "left" && (
+        <span className="btn-icon left">{icon}</span>
+      )}
+      <span className="btn-text">{label}</span>
+      {icon && iconPosition === "right" && (
+        <span className="btn-icon right">{icon}</span>
+      )}
     </button>
   );
 };
